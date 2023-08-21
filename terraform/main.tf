@@ -10,6 +10,7 @@ terraform {
     region = "us-east-2"
   }
 }
+
 # EKS module 
 module "eks" {
   source          = "terraform-aws-modules/eks/aws"  
@@ -19,13 +20,33 @@ module "eks" {
   cluster_version = "1.27"                         
   subnet_ids      = ["subnet-0a426585c2fdad736", "subnet-060391912e702e8e1"] 
 
-# configure 1 node to keep cost down. 
+  # configure 2 nodes to keep cost down. 
   eks_managed_node_groups = {
     eks_nodes = {
       desired_capacity = 1
       max_capacity     = 2
       min_capacity     = 1
-      instance_type    = "t2.micro" 
+      instance_type    = "t2.micro"
     }
   }
+}
+
+# add inbound rule to allow all traffic
+resource "aws_security_group_rule" "allow_all_inbound" {
+  type        = "ingress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"  
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "sg-0ac7be7b2220afa62"
+}
+
+# add outbound rule to allow all traffic
+resource "aws_security_group_rule" "allow_all_outbound" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 0
+  protocol    = "-1"  
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = "sg-0ac7be7b2220afa62"
 }
