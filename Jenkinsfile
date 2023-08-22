@@ -4,13 +4,14 @@ pipeline {
             label 'build-agent'
         }
     }
-    stage {'Debug'} {
-        steps {
-            sh 'echo $PWD'
-            sh 'ls -alt'
-        }
-    }
     stages {
+        stage('Debug Directory Structure') {
+            steps {
+                sh 'echo "Current Directory: $PWD"'
+                sh 'ls -al'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -32,7 +33,7 @@ pipeline {
                 }
             }
         }
-cd
+
         stage('Update Deployment File') {
             steps {
                 dir('kub') {
