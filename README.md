@@ -13,6 +13,17 @@ Jenkins agent set up:
     1. Jenkins build agent (in our case it's the managment console that our bash script was ran)
     2. Go to Dashboard > Manage Jenkins > Nodes >
 
+S3 bucket setup for terraform: 
+    1. Setup a s3 bucket named "s3tfstateohio" or use local machine 
+            terraform {
+            backend "s3" {
+                bucket = "s3tfstateohio"
+                key    = "weather-microservice.tfstate"
+                region = "us-east-2"
+            }
+            }
+
+
     
         
 
