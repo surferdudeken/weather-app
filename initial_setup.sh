@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd weather-app/terraform
+cd terraform
 terraform init
 terraform apply -auto-approve
 
@@ -14,3 +14,8 @@ echo "Waiting for Jenkins to be accessible..."
 sleep 180 
 JENKINS_IP=$(kubectl get svc jenkins -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 echo "Jenkins should be accessible at: http://${JENKINS_IP}:8080"
+
+POD_NAME=$(kubectl get pods -l app=jenkins -n jenkins -o jsonpath="{.items[0].metadata.name}")
+PASSWORD="kubectl logs $POD_NAME -n jenkins | grep -A 5 "Jenkins initial setup is required""
+
+echo $PASSWORD

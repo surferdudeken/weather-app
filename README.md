@@ -3,10 +3,15 @@ Manual Work (management console aka build-agent):
     2. In the "management console" as ec2-user run: 
         - dnf install git
         - git clone https://github.com/surferdudeken/weather-app.git
-        - run weather-app/dep/package_dep.sh (installs dependecies needed)
-        - runn 
+        - run weather-app/package_dep.sh (installs dependecies needed)
+        - After completing the "aws configure" step 
+        - Run weather-app/initial_setup.sh (Will setup jenkins in the eks cluster)
+        - Save the output of the load balancer ip and password
+            
+
 Jenkins agent set up: 
     1. Jenkins build agent (in our case it's the managment console that our bash script was ran)
+    2. Go to Dashboard > Manage Jenkins > Nodes >
 
     
         
