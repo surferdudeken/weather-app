@@ -45,6 +45,8 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 dir('kub') {
+                    sh 'kubectl delete -f weather-app-depolyment.yml'
+                    sh 'kubectl delete -f weather-app-lb.yml'
                     sh 'kubectl apply -f weather-app-deployment.yml'
                     sh 'kubectl apply -f weather-app-lb.yml'
                 }
