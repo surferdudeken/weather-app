@@ -15,5 +15,6 @@ spec:
       containers:
       - name: weather-app
         image: [DOCKER_IMAGE_FOR_WEATHER_APP]
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
