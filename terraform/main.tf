@@ -16,24 +16,6 @@ resource "aws_security_group" "eks_security_group" {
   vpc_id      = "vpc-00a8c79fe20baab1f"
 }
 
-resource "aws_security_group_rule" "jenkins_inbound_http" {
-  type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.eks_security_group.id
-}
-
-resource "aws_security_group_rule" "jenkins_inbound_jnlp" {
-  type              = "ingress"
-  from_port         = 50000
-  to_port           = 50000
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.eks_security_group.id
-}
-
 resource "aws_security_group_rule" "allow_all_outbound" {
   type              = "egress"
   from_port         = 0
@@ -65,25 +47,21 @@ module "eks" {
       additional_security_group_ids = [aws_security_group.eks_security_group.id]
     }
   }
-}
-
-#ADD FIX BELOW TO OPEN EVERYTHIING AFTER THE ABOVE CODE IS RAN
-# add inbound rule to allow all traffic
-resource "aws_security_group_rule" "allow_all_inbound_fix" {
-  type        = "ingress"
-  from_port   = 0
-  to_port     = 0
-  protocol    = "-1"  
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "sg-0ced0512efd3633ea" # Replace with Additional security groups for EKS cluster 
-}
-
-# add outbound rule to allow all traffic
-resource "aws_security_group_rule" "allow_all_outbound_fix" {
-  type        = "egress"
-  from_port   = 0
-  to_port     = 0
-  protocol    = "-1"  
-  cidr_blocks = ["0.0.0.0/0"]
-  security_group_id = "sg-0ced0512efd3633ea" # Replace with Additional security groups for EKS cluster 
+  # Quick dirty workaround to open all ports for additional security groups
+  cluster_security_group_additional_rules = {
+    additional_ingress_rule = {
+      type         = "ingress"
+      cidr_blocks  = ["0.0.0.0/0"]
+      from_port    = 0
+      to_port      = 65535
+      protocol     = "tcp"
+    },
+    additional_egress_rule = {
+      type         = "egress"
+      cidr_blocks  = ["0.0.0.0/0"]
+      from_port    = 0
+      to_port      = 65535
+      protocol     = "tcp"
+    }
+  }
 }

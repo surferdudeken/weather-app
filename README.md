@@ -1,3 +1,16 @@
+Manual Work (management console aka build-agent): 
+    1. Create a ec2 instance calls "management console" this is where we will host our tf code 
+    2. In the "management console" as ec2-user run: 
+        - dnf install git
+        - git clone https://github.com/surferdudeken/weather-app.git
+        - run weather-app/dep/package_dep.sh (installs dependecies needed)
+        - runn 
+Jenkins agent set up: 
+    1. Jenkins build agent (in our case it's the managment console that our bash script was ran)
+
+    
+        
+
 - Instructions: 
     *  aws eks update-kubeconfig --region us-east-2 --name weather-microservice
     * kubectl create namespace jenkins
@@ -7,13 +20,6 @@
     * POD_NAME=$(kubectl get pods -l app=jenkins -n jenkins -o jsonpath="{.items[0].metadata.name}")
     * kubectl logs $POD_NAME -n jenkins | grep -A 5 "Jenkins initial setup is required"
 
-
-
-- Installs:
-    - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-    - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
-    - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-
 - Resources: 
     - https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest
     - https://api.open-meteo.com/v1/forecast?latitude=38.8951&longitude=-77.0364&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=GMT'
@@ -21,9 +27,9 @@
     - https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/storage_class
     - https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs
     - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster
-
-
-    - https://helm.sh/docs/
+    - https://stackoverflow.com/questions/1117398/java-home-directory-in-linux
+    - https://kubernetes.io/docs/reference/kubectl/#output-options
+    - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
 
 - weather-app/source/ref/output_rf

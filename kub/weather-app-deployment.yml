@@ -1,0 +1,5 @@
+containers:
+- name: weather-app
+  image: [DOCKER_IMAGE_FOR_WEATHER_APP]
+  ports:
+  - containerPort: 5000
