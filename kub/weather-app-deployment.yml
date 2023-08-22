@@ -1,3 +1,5 @@
+apiVersion: apps/v1
+kind: Deployment
 containers:
 - name: weather-app
   image: [DOCKER_IMAGE_FOR_WEATHER_APP]
