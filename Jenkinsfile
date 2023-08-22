@@ -37,7 +37,7 @@ pipeline {
         stage('Update Deployment File') {
             steps {
                 dir('kub') {
-                    sh 'sed -i 's|\\[DOCKER_IMAGE_FOR_WEATHER_APP\\]|3.145.173.195:6000/weather-app:latest|g' weather-app-deployment.yml'
+                    sh sh "sed -i 's|\\[DOCKER_IMAGE_FOR_WEATHER_APP\\]|3.145.173.195:6000/weather-app:latest|g' weather-app-deployment.yml"
                 }
             }
         }
