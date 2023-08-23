@@ -18,6 +18,16 @@ pipeline {
             }
         }
         
+        stage('Podman Login') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', passwordVariable: 'DOCKER_PASSWORD', usernameVariable: 'DOCKER_USERNAME')]) {
+                    sh '''#!/bin/bash
+                          echo $DOCKER_PASSWORD | podman login docker.io -u $DOCKER_USERNAME --password-stdin
+                    '''
+                }
+            }
+        }
+
         stage('Build and Tag with Podman') {
             steps {
                 dir('source') {
