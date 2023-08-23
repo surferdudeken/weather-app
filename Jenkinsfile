@@ -69,9 +69,9 @@ pipeline {
             steps {
                 echo "Fetching the Weather App URL..."
                 sh '''#!/bin/bash
-                  sleep 15
+                  sleep 45
                   URL=$(kubectl get svc weather-app-service -o=jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-                  echo "Weather App URL: $URL"
+                  echo "Weather App URL: ${URL}/weather-app"
                 '''
             }
         }
