@@ -31,6 +31,8 @@ Manual Work (management console aka build-agent):
                                                                Credentials: ec2-user
                                                                Host Key Verification Strategy: Non verifyiing Verification Strategy
 
+NOTE!!!! please look in the console output of the "Output Weather App URL" this will display the url. 
+
     5. S3 bucket setup for terraform: 
            1. Setup a s3 bucket named "s3tfstateohio" or use local machine 
               edit the main.tf file as needed: 
