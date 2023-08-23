@@ -22,6 +22,7 @@ Manual Work (management console aka build-agent):
                                                                                        Description: dockerhub-creds
                                                                                        Username: kabaker
                                                                                        password: Asdf_123
+                                                                                       ID: dockerhub-creds
                                                                                        
     4. Go to Dashboard > Manage Jenkins > Select "New Node"  > type "build-agent" 
                                                                enter root directory "/home/ec2-user" 
