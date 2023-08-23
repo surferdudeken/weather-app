@@ -18,10 +18,11 @@ pipeline {
             }
         }
         
-        stage('Build with Podman') {
+        stage('Build and Tag with Podman') {
             steps {
                 dir('source') {
                     sh 'podman build -t weather-app:latest .'
+                    sh 'podman tag weather-app:latest kabaker/weather-app:latest'
                 }
             }
         }
@@ -29,19 +30,11 @@ pipeline {
         stage('Push Image to Registry') {
             steps {
                 dir('source') {
-                    sh 'podman push weather-app:latest 3.145.173.195:6000/weather-app:latest'
+                    sh 'podman push kabaker/weather-app:latest'
                 }
             }
         }
 
-        stage('Update Deployment File') {
-            steps {
-                dir('kub') {
-                    sh "sed -i 's|\\[DOCKER_IMAGE_FOR_WEATHER_APP\\]|3.145.173.195:6000/weather-app:latest|g' weather-app-deployment.yml"
-                }
-            }
-        }
-        
         stage('Deploy to Kubernetes') {
             steps {
                 dir('kub') {

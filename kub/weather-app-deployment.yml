@@ -14,7 +14,6 @@ spec:
     spec:
       containers:
       - name: weather-app
-        image: [DOCKER_IMAGE_FOR_WEATHER_APP]
-        imagePullPolicy: Always
+        image: kabaker/weather-app:latest
         ports:
         - containerPort: 5000

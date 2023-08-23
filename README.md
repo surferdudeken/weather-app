@@ -51,3 +51,8 @@ S3 bucket setup for terraform:
 - weather-app/source/ref/output_rf
     - Output to get understanding what the set up is doing
     - grabbed eks.node_secuirty_id so it could be set dynmaiclly vs statically
+
+
+    podman build -t weather-app .
+podman tag weather-app kabaker/weather-app:latest
+podman push kabaker/weather-app:latest

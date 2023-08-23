@@ -72,18 +72,18 @@ if ! sudo dnf -y install terraform; then
     exit 1
 fi
 
-if ! sudo cp /etc/containers/registries.conf /etc/containers/registries.conf.bak; then
-    echo "Error backing up registries.conf. Exiting."
-    exit 1
-fi
+# if ! sudo cp /etc/containers/registries.conf /etc/containers/registries.conf.bak; then
+#     echo "Error backing up registries.conf. Exiting."
+#     exit 1
+# fi
 
-echo "[registries.insecure]" | sudo tee /etc/containers/registries.conf
-echo "registries = ['$IP_ADDRESS:6000']" | sudo tee -a /etc/containers/registries.conf
+# echo "[registries.insecure]" | sudo tee /etc/containers/registries.conf
+# echo "registries = ['$IP_ADDRESS:6000']" | sudo tee -a /etc/containers/registries.conf
 
-if !  podman run -d -p 6000:5000 --name registry --restart=always registry:2; then
-    echo "Failed to set up the local registry. Exiting."
-    exit 1
-fi
+# if !  podman run -d -p 6000:5000 --name registry --restart=always registry:2; then
+#     echo "Failed to set up the local registry. Exiting."
+#     exit 1
+# fi
 
 echo "All tools have been installed!"
 echo "Please run aws configure"
