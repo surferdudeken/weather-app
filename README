@@ -17,14 +17,20 @@ Manual Work (management console aka build-agent):
                                                                                        Private Key > Enter Directly > copy and paste the private key you created for you ec2 instance 
                                                                                                         managment console aka build-agent
 
-    3. Go to Dashboard > Manage Jenkins > Select "New Node"  > type "build-agent" 
+    3. Go to Dashboard > Manage Jenkins > Credenetials > System > Global Credentials > Select "Add Credentials"
+                                                                                       kind: username and password
+                                                                                       Description: dockerhub-creds
+                                                                                       Username: kabaker
+                                                                                       password: Asdf_123
+                                                                                       
+    4. Go to Dashboard > Manage Jenkins > Select "New Node"  > type "build-agent" 
                                                                enter root directory "/home/ec2-user" 
                                                                Launch method: "Launch agents via SSH" 
                                                                Host: Public Ip of the managent console aka build-agent
                                                                Credentials: ec2-user
                                                                Host Key Verification Strategy: Non verifyiing Verification Strategy
 
-    4. S3 bucket setup for terraform: 
+    5. S3 bucket setup for terraform: 
            1. Setup a s3 bucket named "s3tfstateohio" or use local machine 
               edit the main.tf file as needed: 
                 terraform {
