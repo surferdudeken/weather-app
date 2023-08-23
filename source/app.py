@@ -15,6 +15,7 @@ def get_weather():
     try:
         today_data = data['daily']
         weather_info = {
+            "location": "Washington DC",
             "date": datetime.now().strftime('%Y-%m-%d'),
             "temperature_high": today_data['temperature_2m_max'][0], 
             "temperature_low": today_data['temperature_2m_min'][0],
