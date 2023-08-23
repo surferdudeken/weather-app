@@ -35,6 +35,20 @@ Jenkins agent set up:
                     region = "us-east-2"
                 }
                 }
+
+
+    
+        
+
+- Instructions: 
+    *  aws eks update-kubeconfig --region us-east-2 --name weather-microservice
+    * kubectl create namespace jenkins
+    * kubectl apply -f jenkins-deployment.yml -n jenkins
+    * kubectl apply -f jenkins-lb.yml -n jenkins
+    * kubectl get svc jenkins -n jenkins
+    * POD_NAME=$(kubectl get pods -l app=jenkins -n jenkins -o jsonpath="{.items[0].metadata.name}")
+    * kubectl logs $POD_NAME -n jenkins | grep -A 5 "Jenkins initial setup is required"
+
 - Resources: 
     - https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/latest
     - https://api.open-meteo.com/v1/forecast?latitude=38.8951&longitude=-77.0364&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=GMT'
@@ -45,3 +59,6 @@ Jenkins agent set up:
     - https://stackoverflow.com/questions/1117398/java-home-directory-in-linux
     - https://kubernetes.io/docs/reference/kubectl/#output-options
     - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+
+

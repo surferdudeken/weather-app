@@ -12,7 +12,7 @@ kubectl apply -f ../kub/jenkins-lb.yml -n jenkins
 # cd ../source/
 # podman build -t weather-app:latest .
 clear 
-# fix for ip and get command
+
 echo "Waiting for Jenkins to be accessible..."
 sleep 180 
 JENKINS_IP=$(kubectl get svc jenkins -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -22,3 +22,4 @@ POD_NAME=$(kubectl get pods -l app=jenkins -n jenkins -o jsonpath="{.items[0].me
 PASSWORD=$(kubectl logs $POD_NAME -n jenkins | grep -A 5 "Jenkins initial setup is required")
 
 echo $PASSWORD
+echo "Please configure changes as per the README.md file" 

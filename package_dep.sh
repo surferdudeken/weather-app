@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e 
 
-IP_ADDRESS=""
-
-if [ -z "$IP_ADDRESS" ]; then
-    echo "Error: IP_ADDRESS is not set or is empty. Exiting."
-    exit 1
-fi
-
 if ! sudo dnf install git -y; then
     echo "Error installing git. Exiting."
     exit 1
@@ -71,19 +64,6 @@ if ! sudo dnf -y install terraform; then
     echo "Error installing terraform. Exiting."
     exit 1
 fi
-
-# if ! sudo cp /etc/containers/registries.conf /etc/containers/registries.conf.bak; then
-#     echo "Error backing up registries.conf. Exiting."
-#     exit 1
-# fi
-
-# echo "[registries.insecure]" | sudo tee /etc/containers/registries.conf
-# echo "registries = ['$IP_ADDRESS:6000']" | sudo tee -a /etc/containers/registries.conf
-
-# if !  podman run -d -p 6000:5000 --name registry --restart=always registry:2; then
-#     echo "Failed to set up the local registry. Exiting."
-#     exit 1
-# fi
 
 echo "All tools have been installed!"
 echo "Please run aws configure"
