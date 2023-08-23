@@ -48,17 +48,6 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 dir('kub') {
-                    script {
-                        def returnStatus = sh(script: 'kubectl delete -f weather-app-deployment.yml', returnStatus: true)
-                        if (returnStatus != 0) {
-                            echo "Deletion of weather-app-deployment.yml failed or it does not exist. Continuing..."
-                        }
-
-                        returnStatus = sh(script: 'kubectl delete -f weather-app-lb.yml', returnStatus: true)
-                        if (returnStatus != 0) {
-                            echo "Deletion of weather-app-lb.yml failed or it does not exist. Continuing..."
-                        }
-                    }
                     sh 'kubectl apply -f weather-app-deployment.yml'
                     sh 'kubectl apply -f weather-app-lb.yml'
                 }
