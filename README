@@ -1,9 +1,10 @@
 Manual Work (management console aka build-agent): 
     1. Create a ec2 instance calls "management console" this is where we will host our tf code 
     2. In the "management console" as ec2-user run: 
-        - dnf install git
+        - sudo dnf install git -y 
         - git clone https://github.com/surferdudeken/weather-app.git
-        - run weather-app/package_dep.sh (installs dependecies needed)
+        - chmod 777 weather-app/package_dep.sh weather-app/initial_setup.sh
+        - run ./weather-app/package_dep.sh (installs dependecies needed)
         - After completing the "aws configure" step 
         - Run weather-app/initial_setup.sh (Will setup jenkins in the eks cluster)
             - Save the output of the load balancer ip and password 
