@@ -6,10 +6,8 @@ Manual Work (management console aka build-agent):
         - run weather-app/package_dep.sh (installs dependecies needed)
         - After completing the "aws configure" step 
         - Run weather-app/initial_setup.sh (Will setup jenkins in the eks cluster)
-            - Save the output of the load balancer ip and password
-            
-
-Jenkins agent set up: 
+            - Save the output of the load balancer ip and password 
+ Jenkins agent set up: 
     1. Jenkins build agent (in our case it's the managment console where our bash scripts were ran)
     2. Go to Dashboard > Manage Jenkins > Credenetials > System > Global Credentials > Select "Add Credentials"
                                                                                        kind: SSH username with private key
